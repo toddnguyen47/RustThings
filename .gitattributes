@@ -1,0 +1,15 @@
+* text=auto, eol=lf
+
+# Text Files
+*.rs text
+*.toml text
+*.lock text
+*.css text
+*.html text
+*.md text
+
+# Binary files
+*.png binary
+*.jpeg binary
+*.jpg binary
+*.pdf binary

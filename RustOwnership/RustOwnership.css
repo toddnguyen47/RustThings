@@ -1,0 +1,25 @@
+html {
+  /* 1/16 * 100% = 6.25% */
+  font-size: 6.25%;
+}
+
+body {
+  font-family: Lato, Arial, Helvetica, sans-serif;
+  font-size: 20rem;
+}
+
+pre {
+  font-family: monospace;
+  background-color: lightgray;
+  font-size: 22rem;
+}
+
+/* Ref: https://stackoverflow.com/a/7354648 */
+@media (min-width: 320px) and (max-width: 960px) {
+}
+@media (min-width: 961px) {
+  body {
+    width: 1025px;
+    margin: auto;
+  }
+}
