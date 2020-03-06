@@ -1,3 +1,5 @@
+/* Georg Fischer Color: #167BAC */
+
 html {
   /* 1/16 * 100% = 6.25% */
   font-size: 6.25%;
@@ -6,6 +8,12 @@ html {
 body {
   font-family: Lato, Arial, Helvetica, sans-serif;
   font-size: 20rem;
+  margin-top: 32rem;
+  margin-bottom: 32rem;
+}
+
+h2 {
+  color: #167bac;
 }
 
 pre,
@@ -15,12 +23,28 @@ code {
   font-size: 20rem;
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  background-color: #167bac;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
 /* Ref: https://stackoverflow.com/a/7354648 */
 @media (min-width: 320px) and (max-width: 960px) {
 }
 @media (min-width: 961px) {
   body {
     width: 1025px;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
