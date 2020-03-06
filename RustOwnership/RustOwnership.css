@@ -8,10 +8,11 @@ body {
   font-size: 20rem;
 }
 
-pre {
-  font-family: monospace;
+pre,
+code {
+  font-family: "Share Tech Mono", monospace;
   background-color: lightgray;
-  font-size: 22rem;
+  font-size: 20rem;
 }
 
 /* Ref: https://stackoverflow.com/a/7354648 */
