@@ -6,10 +6,18 @@ header-includes:
   <link rel="stylesheet" href="RustOwnership.css" />
 ---
 
-Blah blah
+## Ownership Introduction
 
-```rust
-fn main() {
-  int x = 0;
-}
-```
+- Ownership is Rust's most unique feature
+- Enables Rust to make memory safety guarantees **WITHOUT** needing a garbage collector
+- Related features to Ownership:
+  - Borrowing
+  - Slices
+  - How Rust lays data out in memory
+
+## What is Ownership?
+
+- All programs have to manage the way they use a computer's memory
+- In other languages, two popular methods of managing memory are:
+  1. Automatic garbage collection, e.g. Java
+  2. Programmer explicitly allocate and free memory, e.g. C
