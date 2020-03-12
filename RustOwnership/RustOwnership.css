@@ -18,7 +18,7 @@ h2 {
 
 pre,
 code {
-  font-family: "Share Tech Mono", monospace;
+  font-family: monospace;
   background-color: rgba(240, 240, 240, 0.9);
   font-size: 20rem;
 }
