@@ -19,8 +19,8 @@ h2 {
 pre,
 code {
   font-family: monospace;
+  font-size: 18rem;
   background-color: rgba(240, 240, 240, 0.9);
-  font-size: 20rem;
 }
 
 table {
