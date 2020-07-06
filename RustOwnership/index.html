@@ -74,12 +74,13 @@
     code span.va { color: #19177c; } /* Variable */
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
   <link rel="stylesheet" href="RustOwnership.css" />
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
-  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet"> <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap" rel="stylesheet"> <link rel="stylesheet" href="RustOwnership.css" />
+  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet"> <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap" rel="stylesheet"> <link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">
 </head>
 <body>
 <header id="title-block-header">
@@ -159,11 +160,11 @@
 <ul>
 <li>A scope is the range within a program for which an item is valid.</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">{</span>                      <span class="co">// s is not valid here, it’s not yet declared</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span>   <span class="co">// s is valid from this point forward</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a>    <span class="co">// do stuff with s</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="op">}</span>                      <span class="co">// this scope is now over, and s is no longer valid</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="op">{</span>                      <span class="co">// s is not valid here, it’s not yet declared</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span>   <span class="co">// s is valid from this point forward</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>    <span class="co">// do stuff with s</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="op">}</span>                      <span class="co">// this scope is now over, and s is no longer valid</span></span></code></pre></div>
 <ul>
 <li>When <code>s</code> comes into scope, it is valid.</li>
 <li>It remains valid until it goes out of scope.</li>
@@ -179,7 +180,7 @@
 </ul></li>
 <li>First part (Allocation) is done here:</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">let</span> <span class="kw">mut</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">&quot;hello&quot;</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">let</span> <span class="kw">mut</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">&quot;hello&quot;</span>)<span class="op">;</span></span></code></pre></div>
 <ul>
 <li>Second part (freeing memory) is the hard part.</li>
 <li>Historically in C/C++, we need to pair exactly one allocate with exactly one free
@@ -189,17 +190,17 @@
 </ul></li>
 <li>Rust takes a different path: the memory is automatically returned once the variable that owns it goes out of scope.</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1"></a><span class="op">{</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">&quot;hello&quot;</span>)<span class="op">;</span> <span class="co">// s is valid from this point forward</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a></span>
-<span id="cb3-4"><a href="#cb3-4"></a>    <span class="co">// do stuff with s</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="op">}</span>                                  <span class="co">// this scope is now over, and s is no</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>                                   <span class="co">// longer valid. drop() is called here!</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">&quot;hello&quot;</span>)<span class="op">;</span> <span class="co">// s is valid from this point forward</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>    <span class="co">// do stuff with s</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a><span class="op">}</span>                                  <span class="co">// this scope is now over, and s is no</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>                                   <span class="co">// longer valid. drop() is called here!</span></span></code></pre></div>
 <p>When a variable goes out of scope, Rust calls a special function for us. This function is called <code>drop</code>, and it’s where the author of <code>String</code> can put the code to return the memory. Rust calls <code>drop</code> <strong>automatically</strong> at the closing curly bracket.</p>
 <h3 id="sample-string-memory-allocation">Sample String Memory Allocation</h3>
 <p>Consider this piece of code.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">let</span> s1 <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">&quot;hello&quot;</span>)<span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">let</span> s2 <span class="op">=</span> s1<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">let</span> s1 <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">&quot;hello&quot;</span>)<span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="kw">let</span> s2 <span class="op">=</span> s1<span class="op">;</span></span></code></pre></div>
 <p>This is a visual representation of what is happening in other languages such as C++.</p>
 <p><img src="images/heapAllocation.svg" alt="heapRepresentation" width="300px" /></p>
 <ul>
@@ -208,10 +209,10 @@
 <li>To ensure memory safety, there’s one more detail to what happens in this situation in Rust. Instead of trying to copy the allocated memory, Rust considers <code>s1</code> to <strong>no longer be valid</strong> and, therefore, Rust doesn’t need to free anything when s1 goes out of scope.</li>
 <li>This code will produce an error!</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">let</span> s1 <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">&quot;hello&quot;</span>)<span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">let</span> s2 <span class="op">=</span> s1<span class="op">;</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="pp">println!</span>(<span class="st">&quot;{}, world!&quot;</span><span class="op">,</span> s1)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">let</span> s1 <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">&quot;hello&quot;</span>)<span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="kw">let</span> s2 <span class="op">=</span> s1<span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a><span class="pp">println!</span>(<span class="st">&quot;{}, world!&quot;</span><span class="op">,</span> s1)<span class="op">;</span></span></code></pre></div>
 <p>Output:</p>
 <pre><code>error[E0382]: use of moved value: `s1`
  --&gt; src/main.rs:5:28
@@ -242,29 +243,29 @@
 <li>If you are interested in how Ownership and functions work, please let me know!</li>
 <li>Here’s some code as to how Ownership work with functions.</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">&quot;hello&quot;</span>)<span class="op">;</span>  <span class="co">// s comes into scope</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a></span>
-<span id="cb7-4"><a href="#cb7-4"></a>    takes_ownership(s)<span class="op">;</span>             <span class="co">// s&#39;s value moves into the function...</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>                                    <span class="co">// ... and so is no longer valid here</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a></span>
-<span id="cb7-7"><a href="#cb7-7"></a>    <span class="kw">let</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>                      <span class="co">// x comes into scope</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a></span>
-<span id="cb7-9"><a href="#cb7-9"></a>    makes_copy(x)<span class="op">;</span>                  <span class="co">// x would move into the function,</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a>                                    <span class="co">// but i32 is Copy, so it’s okay to still</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a>                                    <span class="co">// use x afterward</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a></span>
-<span id="cb7-13"><a href="#cb7-13"></a><span class="op">}</span> <span class="co">// Here, x goes out of scope, then s. But because s&#39;s value was moved, nothing</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a>  <span class="co">// special happens.</span></span>
-<span id="cb7-15"><a href="#cb7-15"></a></span>
-<span id="cb7-16"><a href="#cb7-16"></a><span class="kw">fn</span> takes_ownership(some_string<span class="op">:</span> <span class="dt">String</span>) <span class="op">{</span> <span class="co">// some_string comes into scope</span></span>
-<span id="cb7-17"><a href="#cb7-17"></a>    <span class="pp">println!</span>(<span class="st">&quot;{}&quot;</span><span class="op">,</span> some_string)<span class="op">;</span></span>
-<span id="cb7-18"><a href="#cb7-18"></a><span class="op">}</span> <span class="co">// Here, some_string goes out of scope and `drop` is called. The backing</span></span>
-<span id="cb7-19"><a href="#cb7-19"></a>  <span class="co">// memory is freed.</span></span>
-<span id="cb7-20"><a href="#cb7-20"></a></span>
-<span id="cb7-21"><a href="#cb7-21"></a><span class="kw">fn</span> makes_copy(some_integer<span class="op">:</span> <span class="dt">i32</span>) <span class="op">{</span> <span class="co">// some_integer comes into scope</span></span>
-<span id="cb7-22"><a href="#cb7-22"></a>    <span class="pp">println!</span>(<span class="st">&quot;{}&quot;</span><span class="op">,</span> some_integer)<span class="op">;</span></span>
-<span id="cb7-23"><a href="#cb7-23"></a><span class="op">}</span> <span class="co">// Here, some_integer goes out of scope. Nothing special happens.</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>    <span class="kw">let</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">&quot;hello&quot;</span>)<span class="op">;</span>  <span class="co">// s comes into scope</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a>    takes_ownership(s)<span class="op">;</span>             <span class="co">// s&#39;s value moves into the function...</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>                                    <span class="co">// ... and so is no longer valid here</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a>    <span class="kw">let</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>                      <span class="co">// x comes into scope</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a>    makes_copy(x)<span class="op">;</span>                  <span class="co">// x would move into the function,</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true"></a>                                    <span class="co">// but i32 is Copy, so it’s okay to still</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true"></a>                                    <span class="co">// use x afterward</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true"></a><span class="op">}</span> <span class="co">// Here, x goes out of scope, then s. But because s&#39;s value was moved, nothing</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true"></a>  <span class="co">// special happens.</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true"></a><span class="kw">fn</span> takes_ownership(some_string<span class="op">:</span> <span class="dt">String</span>) <span class="op">{</span> <span class="co">// some_string comes into scope</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true"></a>    <span class="pp">println!</span>(<span class="st">&quot;{}&quot;</span><span class="op">,</span> some_string)<span class="op">;</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true"></a><span class="op">}</span> <span class="co">// Here, some_string goes out of scope and `drop` is called. The backing</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true"></a>  <span class="co">// memory is freed.</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true"></a><span class="kw">fn</span> makes_copy(some_integer<span class="op">:</span> <span class="dt">i32</span>) <span class="op">{</span> <span class="co">// some_integer comes into scope</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true"></a>    <span class="pp">println!</span>(<span class="st">&quot;{}&quot;</span><span class="op">,</span> some_integer)<span class="op">;</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true"></a><span class="op">}</span> <span class="co">// Here, some_integer goes out of scope. Nothing special happens.</span></span></code></pre></div>
 <ul>
 <li>If we tried to use <code>s</code> after the call to <code>takes_ownership</code>, Rust would throw a compile-time error. These static checks protect us from mistakes.</li>
 </ul>
@@ -272,35 +273,35 @@
 <ul>
 <li>Returning values can also transfer ownership</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>    <span class="kw">let</span> s1 <span class="op">=</span> gives_ownership()<span class="op">;</span>         <span class="co">// gives_ownership moves its return</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>                                        <span class="co">// value into s1</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a></span>
-<span id="cb8-5"><a href="#cb8-5"></a>    <span class="kw">let</span> s2 <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">&quot;hello&quot;</span>)<span class="op">;</span>     <span class="co">// s2 comes into scope</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a></span>
-<span id="cb8-7"><a href="#cb8-7"></a>    <span class="kw">let</span> s3 <span class="op">=</span> takes_and_gives_back(s2)<span class="op">;</span>  <span class="co">// s2 is moved into</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a>                                        <span class="co">// takes_and_gives_back, which also</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a>                                        <span class="co">// moves its return value into s3</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="op">}</span> <span class="co">// Here, s3 goes out of scope and is dropped. s2 goes out of scope but was</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a>  <span class="co">// moved, so nothing happens. s1 goes out of scope and is dropped.</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a></span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="kw">fn</span> gives_ownership() <span class="op">-&gt;</span> <span class="dt">String</span> <span class="op">{</span>             <span class="co">// gives_ownership will move its</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a>                                             <span class="co">// return value into the function</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a>                                             <span class="co">// that calls it</span></span>
-<span id="cb8-16"><a href="#cb8-16"></a></span>
-<span id="cb8-17"><a href="#cb8-17"></a>    <span class="kw">let</span> some_string <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">&quot;hello&quot;</span>)<span class="op">;</span> <span class="co">// some_string comes into scope</span></span>
-<span id="cb8-18"><a href="#cb8-18"></a></span>
-<span id="cb8-19"><a href="#cb8-19"></a>    some_string                              <span class="co">// some_string is returned and</span></span>
-<span id="cb8-20"><a href="#cb8-20"></a>                                             <span class="co">// moves out to the calling</span></span>
-<span id="cb8-21"><a href="#cb8-21"></a>                                             <span class="co">// function</span></span>
-<span id="cb8-22"><a href="#cb8-22"></a><span class="op">}</span></span>
-<span id="cb8-23"><a href="#cb8-23"></a></span>
-<span id="cb8-24"><a href="#cb8-24"></a><span class="co">// takes_and_gives_back will take a String and return one</span></span>
-<span id="cb8-25"><a href="#cb8-25"></a><span class="kw">fn</span> takes_and_gives_back(a_string<span class="op">:</span> <span class="dt">String</span>) <span class="op">-&gt;</span> <span class="dt">String</span> <span class="op">{</span> <span class="co">// a_string comes into</span></span>
-<span id="cb8-26"><a href="#cb8-26"></a>                                                      <span class="co">// scope</span></span>
-<span id="cb8-27"><a href="#cb8-27"></a></span>
-<span id="cb8-28"><a href="#cb8-28"></a>    a_string  <span class="co">// a_string is returned and moves out to the calling function</span></span>
-<span id="cb8-29"><a href="#cb8-29"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>    <span class="kw">let</span> s1 <span class="op">=</span> gives_ownership()<span class="op">;</span>         <span class="co">// gives_ownership moves its return</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>                                        <span class="co">// value into s1</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a>    <span class="kw">let</span> s2 <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">&quot;hello&quot;</span>)<span class="op">;</span>     <span class="co">// s2 comes into scope</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a>    <span class="kw">let</span> s3 <span class="op">=</span> takes_and_gives_back(s2)<span class="op">;</span>  <span class="co">// s2 is moved into</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true"></a>                                        <span class="co">// takes_and_gives_back, which also</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a>                                        <span class="co">// moves its return value into s3</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a><span class="op">}</span> <span class="co">// Here, s3 goes out of scope and is dropped. s2 goes out of scope but was</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true"></a>  <span class="co">// moved, so nothing happens. s1 goes out of scope and is dropped.</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true"></a><span class="kw">fn</span> gives_ownership() <span class="op">-&gt;</span> <span class="dt">String</span> <span class="op">{</span>             <span class="co">// gives_ownership will move its</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true"></a>                                             <span class="co">// return value into the function</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true"></a>                                             <span class="co">// that calls it</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true"></a>    <span class="kw">let</span> some_string <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">&quot;hello&quot;</span>)<span class="op">;</span> <span class="co">// some_string comes into scope</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true"></a>    some_string                              <span class="co">// some_string is returned and</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true"></a>                                             <span class="co">// moves out to the calling</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true"></a>                                             <span class="co">// function</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true"></a><span class="co">// takes_and_gives_back will take a String and return one</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true"></a><span class="kw">fn</span> takes_and_gives_back(a_string<span class="op">:</span> <span class="dt">String</span>) <span class="op">-&gt;</span> <span class="dt">String</span> <span class="op">{</span> <span class="co">// a_string comes into</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true"></a>                                                      <span class="co">// scope</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true"></a></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true"></a>    a_string  <span class="co">// a_string is returned and moves out to the calling function</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 <ul>
 <li>As you might notice, the ownership of a variable follows the same pattern every time: <em>assigning a value to another variable moves it</em>.</li>
 <li>When a variable that includes data on the heap goes out of scope, the value will be cleaned up by drop unless the data has been moved to be owned by another variable.</li>
